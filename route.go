@@ -26,6 +26,7 @@ func init() {
 // over HTTP.
 func getPosts(res http.ResponseWriter, req *http.Request) {
 	res.Header().Set("Content-Type", "application/json")
+
 	result, err := json.Marshal(posts)
 
 	if err != nil {
@@ -42,6 +43,8 @@ func getPosts(res http.ResponseWriter, req *http.Request) {
 // incremented ID, adds it to an array, and returns the serialized post as a
 // response.
 func addPost(res http.ResponseWriter, req *http.Request) {
+	res.Header().Set("Content-Type", "application/json")
+
 	var post Post
 
 	err := json.NewDecoder(req.Body).Decode(&post)
