@@ -2,24 +2,19 @@ package main
 
 import (
 	"encoding/json"
+	"lpvdt/api/entity"
 	"net/http"
 )
 
 const port string = ":8000"
 
-type Post struct {
-	Id    int    `json:"id"`
-	Title string `json:"title"`
-	Text  string `json:"text"`
-}
-
 var (
-	posts []Post
+	posts []entity.Post
 )
 
 // The function init generates placeholder data
 func init() {
-	posts = []Post{{Id: 1, Title: "Title 1", Text: "Lorem Upsum"}}
+	posts = []entity.Post{{Id: 1, Title: "Title 1", Text: "Lorem Upsum"}}
 }
 
 // The function getPosts retrieves and returns a list of posts in JSON format
@@ -45,7 +40,7 @@ func getPosts(res http.ResponseWriter, req *http.Request) {
 func addPost(res http.ResponseWriter, req *http.Request) {
 	res.Header().Set("Content-Type", "application/json")
 
-	var post Post
+	var post entity.Post
 
 	err := json.NewDecoder(req.Body).Decode(&post)
 	if err != nil {
